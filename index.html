@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burndown Chart – Plataforma Escolar CFV</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    margin: 0;
+    padding: 32px;
+    color: #1f2937;
+  }
+  .container {
+    max-width: 1050px;
+    margin: auto;
+    background: white;
+    padding: 32px;
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.10);
+  }
+  h1 {
+    text-align: center;
+    margin: 0 0 10px;
+    font-size: 28px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 28px;
+  }
+  .chart-wrap {
+    overflow-x: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 14px;
+    background: #ffffff;
+  }
+  svg {
+    width: 100%;
+    min-width: 760px;
+    height: auto;
+  }
+  .grid { stroke: #e5e7eb; stroke-width: 1; }
+  .axis { stroke: #475569; stroke-width: 1.4; }
+  .tick { stroke: #475569; stroke-width: 1; }
+  .axis-label { font-size: 13px; fill: #475569; }
+  .axis-title { font-size: 15px; fill: #334155; font-weight: 600; }
+  .ideal { fill: none; stroke: #2563eb; stroke-width: 4; }
+  .real { fill: none; stroke: #f97316; stroke-width: 4; }
+  .marker-ideal { fill: #2563eb; }
+  .marker-real { fill: #f97316; }
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 14px;
+    font-size: 14px;
+  }
+  .legend span::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 4px;
+    margin-right: 8px;
+    vertical-align: middle;
+    border-radius: 4px;
+  }
+  .legend .ideal-l::before { background: #2563eb; }
+  .legend .real-l::before { background: #f97316; }
+  .info {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .card {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 18px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+  }
+  th, td {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 10px;
+    text-align: center;
+  }
+  th {
+    background: #eef2ff;
+  }
+  @media (max-width: 800px) {
+    body { padding: 14px; }
+    .container { padding: 18px; }
+    .info { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Burndown Chart – Plataforma Escolar CFV</h1>
+    <div class="subtitle">Burndown del proyecto con línea ideal y línea real de trabajo pendiente.</div>
+
+    <div class="chart-wrap">
+      <svg viewBox="0 0 900 460" role="img" aria-label="Gráfica burndown">
+        <line x1="70" y1="390.0" x2="870" y2="390.0" class="grid"/><text x="55" y="394.0" class="axis-label" text-anchor="end">0</text><line x1="70" y1="331.7" x2="870" y2="331.7" class="grid"/><text x="55" y="335.7" class="axis-label" text-anchor="end">20</text><line x1="70" y1="273.3" x2="870" y2="273.3" class="grid"/><text x="55" y="277.3" class="axis-label" text-anchor="end">40</text><line x1="70" y1="215.0" x2="870" y2="215.0" class="grid"/><text x="55" y="219.0" class="axis-label" text-anchor="end">60</text><line x1="70" y1="156.7" x2="870" y2="156.7" class="grid"/><text x="55" y="160.7" class="axis-label" text-anchor="end">80</text><line x1="70" y1="98.3" x2="870" y2="98.3" class="grid"/><text x="55" y="102.3" class="axis-label" text-anchor="end">100</text><line x1="70" y1="40.0" x2="870" y2="40.0" class="grid"/><text x="55" y="44.0" class="axis-label" text-anchor="end">120</text>
+        <line x1="70" y1="390" x2="870" y2="390" class="axis"/>
+        <line x1="70" y1="40" x2="70" y2="390" class="axis"/>
+        <text x="70.0" y="418" class="axis-label" text-anchor="middle">1</text><line x1="70.0" y1="390" x2="70.0" y2="395" class="tick"/><text x="158.9" y="418" class="axis-label" text-anchor="middle">2</text><line x1="158.9" y1="390" x2="158.9" y2="395" class="tick"/><text x="247.8" y="418" class="axis-label" text-anchor="middle">3</text><line x1="247.8" y1="390" x2="247.8" y2="395" class="tick"/><text x="336.7" y="418" class="axis-label" text-anchor="middle">4</text><line x1="336.7" y1="390" x2="336.7" y2="395" class="tick"/><text x="425.6" y="418" class="axis-label" text-anchor="middle">5</text><line x1="425.6" y1="390" x2="425.6" y2="395" class="tick"/><text x="514.4" y="418" class="axis-label" text-anchor="middle">6</text><line x1="514.4" y1="390" x2="514.4" y2="395" class="tick"/><text x="603.3" y="418" class="axis-label" text-anchor="middle">7</text><line x1="603.3" y1="390" x2="603.3" y2="395" class="tick"/><text x="692.2" y="418" class="axis-label" text-anchor="middle">8</text><line x1="692.2" y1="390" x2="692.2" y2="395" class="tick"/><text x="781.1" y="418" class="axis-label" text-anchor="middle">9</text><line x1="781.1" y1="390" x2="781.1" y2="395" class="tick"/><text x="870.0" y="418" class="axis-label" text-anchor="middle">10</text><line x1="870.0" y1="390" x2="870.0" y2="395" class="tick"/>
+        <polyline points="70.0,98.3 158.9,127.5 247.8,156.7 336.7,185.8 425.6,215.0 514.4,244.2 603.3,273.3 692.2,302.5 781.1,331.7 870.0,360.8" class="ideal"/>
+        <polyline points="70.0,98.3 158.9,121.7 247.8,145.0 336.7,180.0 425.6,209.2 514.4,238.3 603.3,267.5 692.2,308.3 781.1,346.2 870.0,366.7" class="real"/>
+        <circle cx="70.0" cy="98.3" r="4.5" class="marker-ideal"/><circle cx="158.9" cy="127.5" r="4.5" class="marker-ideal"/><circle cx="247.8" cy="156.7" r="4.5" class="marker-ideal"/><circle cx="336.7" cy="185.8" r="4.5" class="marker-ideal"/><circle cx="425.6" cy="215.0" r="4.5" class="marker-ideal"/><circle cx="514.4" cy="244.2" r="4.5" class="marker-ideal"/><circle cx="603.3" cy="273.3" r="4.5" class="marker-ideal"/><circle cx="692.2" cy="302.5" r="4.5" class="marker-ideal"/><circle cx="781.1" cy="331.7" r="4.5" class="marker-ideal"/><circle cx="870.0" cy="360.8" r="4.5" class="marker-ideal"/>
+        <circle cx="70.0" cy="98.3" r="4.5" class="marker-real"/><circle cx="158.9" cy="121.7" r="4.5" class="marker-real"/><circle cx="247.8" cy="145.0" r="4.5" class="marker-real"/><circle cx="336.7" cy="180.0" r="4.5" class="marker-real"/><circle cx="425.6" cy="209.2" r="4.5" class="marker-real"/><circle cx="514.4" cy="238.3" r="4.5" class="marker-real"/><circle cx="603.3" cy="267.5" r="4.5" class="marker-real"/><circle cx="692.2" cy="308.3" r="4.5" class="marker-real"/><circle cx="781.1" cy="346.2" r="4.5" class="marker-real"/><circle cx="870.0" cy="366.7" r="4.5" class="marker-real"/>
+        <text x="450.0" y="442" text-anchor="middle" class="axis-title">Sprints</text>
+        <text x="20" y="230.0" text-anchor="middle" class="axis-title" transform="rotate(-90 20 230.0)">Trabajo pendiente (%)</text>
+      </svg>
+      <div class="legend">
+        <span class="ideal-l">Ideal</span>
+        <span class="real-l">Real</span>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="card">
+        <h2>Interpretación</h2>
+        <p>El proyecto muestra un avance aproximado del 90%. La línea real se mantiene cercana a la línea ideal, con algunas variaciones normales por ajustes técnicos, validaciones y correcciones finales.</p>
+      </div>
+      <div class="card">
+        <h2>Trabajo pendiente</h2>
+        <p>Quedan pendientes actividades finales de documentación, revisión, pruebas y mejoras menores antes de cerrar la entrega.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 18px;">
+      <h2>Datos utilizados</h2>
+      <table>
+        <thead><tr><th>Sprint</th><th>Ideal</th><th>Real</th></tr></thead>
+        <tbody><tr><td>1</td><td>100</td><td>100</td></tr>
+<tr><td>2</td><td>90</td><td>92</td></tr>
+<tr><td>3</td><td>80</td><td>84</td></tr>
+<tr><td>4</td><td>70</td><td>72</td></tr>
+<tr><td>5</td><td>60</td><td>62</td></tr>
+<tr><td>6</td><td>50</td><td>52</td></tr>
+<tr><td>7</td><td>40</td><td>42</td></tr>
+<tr><td>8</td><td>30</td><td>28</td></tr>
+<tr><td>9</td><td>20</td><td>15</td></tr>
+<tr><td>10</td><td>10</td><td>8</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
